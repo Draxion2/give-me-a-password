@@ -8,7 +8,7 @@
         <title>Give Me a Password</title>
     </head>
     <body>
-        <section class="container">
+        <main class="container">
             <div class="container-header">
                 <h1>Give Me a Password</h1>
                 <p>
@@ -20,13 +20,11 @@
                     - Choice of special characters -
                 </p>
             </div>
-            <div class="password-display">
-                <span id="password"></span>
-            </div>
+            <textarea id="password" maxlength="125"></textarea>
             <div class="container-footer">
                 <button id="generate" onclick="addPassword()">Generate Password</button>
             </div>
-        </section>
+        </main>
         <script src="./assets/js/password.js"></script>
     </body>
 </html>

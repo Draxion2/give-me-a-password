@@ -42,16 +42,16 @@ body {
     margin: 15px 0;
 }
 
-.password-display {
+#password {
     background: #fff;
     margin-top: 10px;
     color: #000;
     margin: 0 auto;
-    width: 700px;
+    width: 800px;
     height: 125px;
     border: 2px solid var(--secondary-border-color);
     text-align: center;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 .container-footer {

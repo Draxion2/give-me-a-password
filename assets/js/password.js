@@ -1,4 +1,3 @@
-
 // declare variables
 var letters = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
 numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
@@ -33,7 +32,12 @@ var createChar = function() {
     var ranPrompts = Math.floor(Math.random() * 3) + 1; // 1 - 3
 
     // letters
-    if (ranPrompts === 1 && !noLettersChoice) {
+    if (ranPrompts === 1) {
+
+        // check to be sure letters are included
+        if (noLettersChoice) {
+            createChar();
+        }
 
         // lowercase = true, uppercase = true
         if (lowerChoice === true && upperChoice === true) {
@@ -53,22 +57,29 @@ var createChar = function() {
         // lowercase = false, uppercase = true
         else if (lowerChoice === false && upperChoice === true) {
             password.innerHTML += getLetters().toUpperCase();
-        } else {
-            return;
         }
 
+    } 
+    
     // numbers
-    } else if (ranPrompts === 2 && numberChoice) {
+    else if (ranPrompts === 2 && numberChoice) {
         password.innerHTML += getNumbers();
     
+    } 
+    
     // special characters
-    } else if (ranPrompts == 3 && specialChoice) {
+    else if (ranPrompts == 3 && specialChoice) {
         password.innerHTML += getSpecialChar();
+    }
+
+    // default
+    else {
+        createChar();
     }
 }
 
 // click 'button' to randomize characters
-function addPassword() {
+var addPassword = function() {
 
     // clear previous passwords if any
     password.innerHTML = "";
@@ -118,15 +129,15 @@ function addPassword() {
     var chooseCharacters = function() {
         var charNum = prompt("How many characters? 8 - 125");
         charNum = parseInt(charNum);
-        if (charNum < 8 || charNum > 125) {
+        if (charNum < 8 || charNum > 125 || !charNum) {
             alert("Please choose between 8 - 125!");
             chooseCharacters();
         } else {
             var numOfPrompts = charNum;
     
             while(numOfPrompts > 0) {
-                createChar();
                 numOfPrompts--;
+                createChar();
             }
         }
     }
