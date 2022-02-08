@@ -6,7 +6,7 @@ This application offers users to generate random passwords.
 
 To offer users to generate passwords based on personal preferences like choosing between having lowercase and uppercase letters, numbers, and special characters.
 
-![alt text](https://i.gyazo.com/89bcb77e388bda6e613b7f342a367947.png)
+![alt text](https://i.gyazo.com/a49631e0f8dfbc5c77f19ef53bb4bb6d.png)
 
 ## Goals
 * Provide a user the opportunity to generate passwords by the click of a button
