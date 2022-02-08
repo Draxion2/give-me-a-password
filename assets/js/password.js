@@ -1,11 +1,135 @@
 
+// declare variables
+var letters = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+specialChar = ["!", "”", "#", "$", "%", "&", "\'", "(", ")", "*", "+", ",", "-", ".", ";", ":", "/", "<", "=", ">", "?", "@", "^", "~"],
+password = document.getElementById("password"),
+lowerChoice = false,
+upperChoice = false,
+lettersChoice = true,
+numberChoice = false,
+specialChoice = false;
 
-// Click a 'button' and generates a password //
+// random letters
+var getLetters = function() {
+    var ranLetters = letters[Math.floor(Math.random() * letters.length)];
+    return ranLetters;
+}
 
-// ask user to or NOT include lowercase, uppercase, numeric, and/or special characters //
+// random numbers
+var getNumbers = function() {
+    var ranNumbers = numbers[Math.floor(Math.random() * numbers.length)];
+    return ranNumbers;
+}
 
-// input should be validated and at least one character type should be selected //
+// random special characters
+var getSpecialChar = function() {
+    var ranSpecialChar = specialChar[Math.floor(Math.random() * specialChar.length)];
+    return ranSpecialChar;
+}
 
-// After all prompts are answered by the user then a password will generate that matches //
+// create characters
+var createChar = function() {
+    var ranPrompts = Math.floor(Math.random() * 3) + 1; // 1 - 3
 
-// password then is displayed as an alert or on the webpage //
+    // letters
+    if (ranPrompts === 1 && !lettersChoice) {
+
+        // lowercase = true, uppercase = true
+        if (lowerChoice === true && upperChoice === true) {
+            var ranUpLow = Math.floor(Math.random() *2) +1; // 1 - 2
+            if (ranUpLow === 1) {
+                password.innerHTML += getLetters().toUpperCase();
+            } else {
+                password.innerHTML += getLetters();
+            }
+        }
+
+        // lowercase = true, uppercase = false
+        else if (lowerChoice === true && upperChoice === false) {
+            password.innerHTML += getLetters();
+        }
+
+        // lowercase = false, uppercase = true
+        else if (lowerChoice === false && upperChoice === true) {
+            password.innerHTML += getLetters().toUpperCase();
+        }
+
+    // numbers
+    } else if (ranPrompts === 2 && numberChoice) {
+        password.innerHTML += getNumbers();
+    
+    // special characters
+    } else if (ranPrompts == 3 && specialChoice) {
+        password.innerHTML += getSpecialChar();
+    } 
+    
+    // if nothing returns
+    else {
+        if (upperChoice) {
+            password.innerHTML += getLetters().toUpperCase();
+        } else {
+            password.innerHTML += getLetters();
+        }
+    }
+}
+
+// click 'button' to randomize characters
+function addPassword() {
+
+    // clear previous passwords if any
+    password.innerHTML = "";
+
+    // ask for lowercase letters
+    var chooseLower = confirm("Include lowercase letters?");
+    if (chooseLower) {
+        lowerChoice = true;
+    }
+    console.log(lowerChoice);
+
+    // ask for uppercase letters
+    var chooseUpper = confirm("Include uppercase letters?");
+    if (chooseUpper) {
+        upperChoice = true;
+    }
+    console.log(upperChoice);
+
+    // if both choices above are false
+    if (!chooseLower && !chooseUpper) {
+        var chooseLetters = confirm("Would you like to include letters?");
+        if (chooseLetters) {
+            lettersChoice = false;
+        }
+    }
+
+    // ask for numeric
+    var chooseNumeric = confirm("Include numberic characters?");
+    if (chooseNumeric) {
+        numberChoice = true;
+    }
+    console.log(chooseNumeric);
+
+    // ask for special characters
+    var chooseSpecialChar = confirm("Include special characters?");
+    if (chooseSpecialChar) {
+        specialChoice = true;
+    }
+    console.log(chooseSpecialChar);
+
+    var chooseCharacters = function() {
+        var charNum = prompt("How many characters?");
+        charNum = parseInt(charNum);
+        if (charNum < 8 || charNum > 125) {
+            alert("Please choose a valid number");
+            chooseCharacters();
+        } else {
+            var numOfPrompts = charNum;
+    
+            while(numOfPrompts > 0) {
+                createChar();
+                numOfPrompts--;
+            }
+        }
+    }
+    chooseCharacters();
+}
