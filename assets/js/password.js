@@ -9,6 +9,22 @@ noLettersChoice = false,
 numberChoice = false,
 specialChoice = false;
 
+
+// reset everything
+var reset = function() {
+
+    // clear previous passwords if any
+    password.innerHTML = "";
+    console.clear();
+
+    // reset variables
+    lowerChoice = false,
+    upperChoice = false,
+    noLettersChoice = false,
+    numberChoice = false,
+    specialChoice = false;
+}
+
 // random letters
 var getLetters = function() {
     var ranLetters = letters[Math.floor(Math.random() * letters.length)];
@@ -89,6 +105,8 @@ var addPassword = function() {
     var chooseLower = confirm("Include lowercase letters?");
     if (chooseLower) {
         lowerChoice = true;
+    } else {
+        lowerChoice = false;
     }
     console.log("Lowercase letters = " + lowerChoice);
 
@@ -96,12 +114,19 @@ var addPassword = function() {
     var chooseUpper = confirm("Include uppercase letters?");
     if (chooseUpper) {
         upperChoice = true;
+    }  else {
+        upperChoice = false;
     }
     console.log("Uppercase letters = " + upperChoice);
 
     // if both choices above are false
     if (!chooseLower && !chooseUpper) {
         var chooseLetters = confirm("Would you like to include letters?");
+        if (chooseLetters) {
+            alert("Please either choose to include lowercase or uppercase letters if you want letters in your password.");
+            addPassword();
+            return false;
+        }
         if (!chooseLetters) {
             noLettersChoice = true;
             console.log("No Letters = " + noLettersChoice);

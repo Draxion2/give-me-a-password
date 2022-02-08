@@ -55,23 +55,25 @@ body {
 }
 
 .container-footer {
-    margin: 0 auto;
-    width: 175px;
     margin-top: 20px;
 }
 
-#generate {
+.btn {
     padding: 10px 20px;
     background: var(--tertiary-color);
+    position: relative;
+    margin-left: 20px;
+    left: 170px;
     color: #fff;
     font-weight: bold;
+    width: 200px;
     transition: 300ms;
     -moz-transition: 300ms;
     -o-transition: 300ms;
     -webkit-transition: 300ms;
 }
 
-#generate:hover {
+.btn:hover {
     cursor: pointer;
     background: #000;
     color: #fff;
