@@ -20,7 +20,7 @@ body {
 .container {
     width: 800px;
     margin: 50px auto;
-    height: 325px;
+    height: 400px;
     padding: 10px;
     background: var(--primary-color);
     border: 5px solid var(--primary-border-color);
@@ -30,6 +30,10 @@ body {
 .container-header h1 {
     font-size: 35px;
     text-transform: uppercase;
+}
+
+.container-header ul li {
+    list-style: none;
 }
 
 .container-header h1,

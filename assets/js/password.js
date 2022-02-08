@@ -6,7 +6,7 @@ specialChar = ["!", "”", "#", "$", "%", "&", "\'", "(", ")", "*", "+", ",", "-
 password = document.getElementById("password"),
 lowerChoice = false,
 upperChoice = false,
-lettersChoice = true,
+noLettersChoice = false,
 numberChoice = false,
 specialChoice = false;
 
@@ -33,7 +33,7 @@ var createChar = function() {
     var ranPrompts = Math.floor(Math.random() * 3) + 1; // 1 - 3
 
     // letters
-    if (ranPrompts === 1 && !lettersChoice) {
+    if (ranPrompts === 1 && !noLettersChoice) {
 
         // lowercase = true, uppercase = true
         if (lowerChoice === true && upperChoice === true) {
@@ -53,6 +53,8 @@ var createChar = function() {
         // lowercase = false, uppercase = true
         else if (lowerChoice === false && upperChoice === true) {
             password.innerHTML += getLetters().toUpperCase();
+        } else {
+            return;
         }
 
     // numbers
@@ -62,15 +64,6 @@ var createChar = function() {
     // special characters
     } else if (ranPrompts == 3 && specialChoice) {
         password.innerHTML += getSpecialChar();
-    } 
-    
-    // if nothing returns
-    else {
-        if (upperChoice) {
-            password.innerHTML += getLetters().toUpperCase();
-        } else {
-            password.innerHTML += getLetters();
-        }
     }
 }
 
@@ -79,26 +72,28 @@ function addPassword() {
 
     // clear previous passwords if any
     password.innerHTML = "";
+    console.clear();
 
     // ask for lowercase letters
     var chooseLower = confirm("Include lowercase letters?");
     if (chooseLower) {
         lowerChoice = true;
     }
-    console.log(lowerChoice);
+    console.log("Lowercase letters = " + lowerChoice);
 
     // ask for uppercase letters
     var chooseUpper = confirm("Include uppercase letters?");
     if (chooseUpper) {
         upperChoice = true;
     }
-    console.log(upperChoice);
+    console.log("Uppercase letters = " + upperChoice);
 
     // if both choices above are false
     if (!chooseLower && !chooseUpper) {
         var chooseLetters = confirm("Would you like to include letters?");
-        if (chooseLetters) {
-            lettersChoice = false;
+        if (!chooseLetters) {
+            noLettersChoice = true;
+            console.log("No Letters = " + noLettersChoice);
         }
     }
 
@@ -106,21 +101,25 @@ function addPassword() {
     var chooseNumeric = confirm("Include numberic characters?");
     if (chooseNumeric) {
         numberChoice = true;
+    } else {
+        numberChoice = false;
     }
-    console.log(chooseNumeric);
+    console.log("Numeric characters = " + numberChoice);
 
     // ask for special characters
     var chooseSpecialChar = confirm("Include special characters?");
     if (chooseSpecialChar) {
         specialChoice = true;
+    } else {
+        specialChoice = false;
     }
-    console.log(chooseSpecialChar);
+    console.log("Special characters = " + specialChoice);
 
     var chooseCharacters = function() {
-        var charNum = prompt("How many characters?");
+        var charNum = prompt("How many characters? 8 - 125");
         charNum = parseInt(charNum);
         if (charNum < 8 || charNum > 125) {
-            alert("Please choose a valid number");
+            alert("Please choose between 8 - 125!");
             chooseCharacters();
         } else {
             var numOfPrompts = charNum;
